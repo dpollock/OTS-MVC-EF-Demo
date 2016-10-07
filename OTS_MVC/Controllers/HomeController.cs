@@ -10,21 +10,34 @@ namespace OTS_MVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var message = new Company { CompanyName = "OTS", NumofEmployees = 63,
+                Address= new Address { StreetAddress = "123 Main St", City = "Kochi" }
+            };
+
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult About()
+
+        public ActionResult IndexFile()
         {
-            ViewBag.Message = "Your application description page.";
+           
 
-            return View();
+            return File(Server.MapPath("~/project_readme.html"), "plain/text");
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+    }
+
+    public class Address
+    {
+        public string City { get; set; }
+        public string StreetAddress { get; set; }
+    }
+
+    public class Company
+    {
+        public string CompanyName { get; set; }
+        public int NumofEmployees { get; set; }
+        public Address Address { get; set; }
     }
 }
